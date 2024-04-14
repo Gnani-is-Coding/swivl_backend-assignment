@@ -1,0 +1,27 @@
+###
+GET http://localhost:3004/users
+//Get all users in DB
+
+###
+POST http://localhost:3004/register
+Content-Type: application/json
+
+{
+    "username": "demo2@gmail.com",
+    "name": "demoName",
+    "gender": "Female",
+    "location": "Hyderabad",
+    "password": "123456789"
+}
+
+###
+POST http://localhost:3004/login
+Content-Type: application/json
+
+{
+    "username": "demo2@gmail.com",
+    "password": "123456789"
+}
+
+###
+GET http://localhost:3004/diary
