@@ -29,8 +29,33 @@ const initializeDbandServer = async () => {
 
 initializeDbandServer()
 
+const authenticateJwtToken = (response,request, next) => {
+    let jwtToken
+    const authorizationHeaders = response.headers["authorization"]
+    
+    if (authorizationHeaders) {
+        jwtToken = authorizationHeaders.split(" ")[1]
+    }
+    if (jwtToken === undefined) {
+        response.status = 401 
+        response.send("Invalid JWT Token")
+    } else {
+        jwt.verify(jwtToken, "MY_SECRET_TOKEN", (error,payload) => {
+            if (error) {
+                response.status = 401
+                response.send("Invalid JWT Token")
+            }else {
+                console.log(payload, "authneicated payload")
+                response.payload = payload
+                next()
+            }
+        })
+    }
+
+}
+
 // Get all USERS API
-app.get("/users", async (request,response) => {
+app.get("/users", authenticateJwtToken, async (request,response) => {
     const query = `SELECT * FROM user;`
     const result = await db.all(query)
     console.log("get users",result)

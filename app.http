@@ -1,6 +1,7 @@
 ###
 GET http://localhost:3004/users
 //Get all users in DB
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
 
 ###
 POST http://localhost:3004/register
