@@ -25,4 +25,43 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3004/diary
+GET http://localhost:3004/diaries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+//Get all Diaries from Db
+
+###
+GET http://localhost:3004/diary/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+
+###
+GET http://localhost:3004/user/2/diaries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+
+###
+GET http://localhost:3004/user/2/diaries/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+
+###
+POST http://localhost:3004/user/1/diaries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+Content-Type: application/json
+
+{
+    "title":"A Day in Church Street",
+    "description":"Visited Church Street, did shopping",
+    "date":"2024-04-10",
+    "location": "Bangalore"
+}
+
+###
+PUT http://localhost:3004/user/1/diary/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
+Content-Type: application/json
+
+{
+    "location": "Bangaluru"
+}
+
+###
+DELETE http://localhost:3004/user/1/diary/2 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8yQGdtYWlsLmNvbSIsImlhdCI6MTcxMzA5NTc2NH0.6RB0dImtZ2sxpfL8JP1VQmDw5YPjPLyKPPyrjiAJ63Q
