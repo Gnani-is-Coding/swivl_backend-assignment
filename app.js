@@ -29,8 +29,34 @@ const initializeDbandServer = async () => {
 
 initializeDbandServer()
 
+const authenticateJwtToken = (request,response, next) => {
+    let jwtToken
+    const authorizationHeaders = request.headers["authorization"]
+    
+    if (authorizationHeaders) {
+        jwtToken = authorizationHeaders.split(" ")[1]
+    }
+    if (jwtToken === undefined) {
+        response.status = 401 
+        response.send("Invalid JWT Token")
+    } else {
+        jwt.verify(jwtToken, "MY_SECRET_TOKEN", (error,payload) => {
+            if (error) {
+                response.status = 401
+                response.send("Invalid JWT Token")
+            }else {
+                console.log(payload, "authneicated payload")
+                response.payload = payload
+                next()
+            }
+        })
+    }
+
+}
+
+
 // Get all USERS API
-app.get("/users", async (request,response) => {
+app.get("/users", authenticateJwtToken, async (request,response) => {
     const query = `SELECT * FROM user;`
     const result = await db.all(query)
     console.log("get users",result)
@@ -89,8 +115,76 @@ app.post("/login", async (request,response) => {
     }
 })
 
+//Get all Diaries in DB API
+app.get("/diaries", authenticateJwtToken, async (request, response) => {
+    const getDiariesQuery = `SELECT * FROM Diary;`
+    const dbResponse = await db.all(getDiariesQuery)
+
+    console.log(dbResponse)
+    response.send(dbResponse)
+})
+
+//Get specific diary
+app.get("/diary/:diaryId", authenticateJwtToken, async (request,response) => {
+    const {diaryId} = request.params
+    const getDiary = `SELECT * FROM Diary WHERE id = '${diaryId}';`
+    const dbResponse = await db.get(getDiary)
+
+    console.log(dbResponse)
+    response.send(dbResponse)
+})
+
+//Get specific user diaries
+app.get("/user/:userId/diaries", authenticateJwtToken, async (request,response) => {
+    const {userId} = request.params
+    const getDiary = `SELECT * FROM Diary WHERE user_id = '${userId}';`
+    const dbResponse = await db.all(getDiary)
+
+    console.log(dbResponse)
+    response.send(dbResponse)
+})
+
+//Get Diary by ID for specefic User
+app.get("/user/:userId/diaries/:diaryId", authenticateJwtToken, async (request,response) => {
+    const {userId,diaryId} = request.params
+    const getDiary = `SELECT * FROM Diary WHERE user_id = '${userId}' and id = '${diaryId}';`
+    const dbResponse = await db.get(getDiary)
+
+    console.log(dbResponse)
+    response.send(dbResponse)
+})
+
+//Create new Diary
+app.post("/user/:userId/diaries/", authenticateJwtToken, async(request, response) => {
+    const {userId} = request.params 
+    const {title,description,date,location,user_id} = request.body
+    const createDiaryQuery = `INSERT INTO Diary (title, description, Date, Location, user_id)
+    VALUES('${title}','${description}','${date}','${location}','${userId}') ;`
+
+    const dbResponse = await db.run(createDiaryQuery)
+    console.log(`Created new User with ${dbResponse.lastID}`)
+    response.send(`Created new User with ${dbResponse.lastID}`)
+})
+
+//Update an existing diary
+app.put("/user/:userId/diary/:diaryId", authenticateJwtToken, async(request,response) => {
+    const {location} = request.body
+    const {diaryId} = request.params
+    const query = `UPDATE Diary SET Location = '${location}' WHERE id = '${diaryId}';`
+
+    await db.run(query)
+    response.send("Diary Details Updated")
+})
+
+//Delete an existing Diary
+app.delete("/user/:userId/diary/:diaryId",authenticateJwtToken, async (request, response) => {
+    const {userId,diaryId} = request.params
+    const query = `DELETE FROM Diary WHERE id = ${diaryId} AND user_id = ${userId}`;
+    await db.run(query);
+    response.send("Diary entry deleted successfully");
+});
 
 
-
+module.exports = app
 
 
