@@ -29,9 +29,9 @@ const initializeDbandServer = async () => {
 
 initializeDbandServer()
 
-const authenticateJwtToken = (response,request, next) => {
+const authenticateJwtToken = (request,response, next) => {
     let jwtToken
-    const authorizationHeaders = response.headers["authorization"]
+    const authorizationHeaders = request.headers["authorization"]
     
     if (authorizationHeaders) {
         jwtToken = authorizationHeaders.split(" ")[1]
