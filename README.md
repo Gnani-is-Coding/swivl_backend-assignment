@@ -46,12 +46,12 @@ Given an `app.js` file and a database file `travelDiary.db` consisting of two ta
 #### Method: `GET`
 
 **Response**
-    - **Status code**
-      ```
-      400
-      ```
-    - **Body**
-      ```
+  - **Status code**
+    ```
+      200
+    ```
+  - **Body**
+    ```
       [
       {
         "id": 1,
