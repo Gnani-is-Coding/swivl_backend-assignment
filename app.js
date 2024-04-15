@@ -29,6 +29,8 @@ const initializeDbandServer = async () => {
 
 initializeDbandServer()
 
+
+//Middleware function
 const authenticateJwtToken = (request,response, next) => {
     let jwtToken
     const authorizationHeaders = request.headers["authorization"]
@@ -54,6 +56,10 @@ const authenticateJwtToken = (request,response, next) => {
 
 }
 
+app.get("/", async(request, response) => {
+    console.log("Hello ")
+    response.send("Hello World")
+})
 
 // Get all USERS API
 app.get("/users",async (request,response) => {
