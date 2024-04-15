@@ -56,9 +56,10 @@ const authenticateJwtToken = (request,response, next) => {
 
 }
 
-app.get("/", async(request, response) => {
-    console.log("Hello ")
-    response.send("Hello World")
+
+app.get("/", async(req,res) => {
+    console.log("Hello World")
+    res.send("Hello, from Gnani")
 })
 
 // Get all USERS API
