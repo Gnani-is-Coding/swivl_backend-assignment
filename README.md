@@ -1,5 +1,25 @@
 # Travel Diary Platform Backend
 Use `npm install` to install the packages.
+To run the server, Use `npm start`, starts a server at `http://localhost:3004` and route to different endpoints like below
+
+For Eg: 
+`http://localhost:3004/users`
+respondes with 
+```
+ [
+      {
+        "id": 1,
+        "username": "demo@gmail.com",
+        "name": "Gnani",
+        "Gender": "Male",
+        "PASSWORD": "123",
+        "Location": "Bangalore"
+      },
+      '
+      '
+      '
+]
+```
 
 
 
@@ -297,17 +317,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlb
   ```
     200
   ```
-  - **Body**
-    ```
-{
-  "id": 1,
-  "title": "Trip to Nandi Hills",
-  "description": "Visited Nandi Hills and Skandhagiri Hills",
-  "Date": "2024-04-16",
-  "Location": "Chikkabellapur",
-  "user_id": 1
-}
-    ```
+- **Body**
+```
+  {
+    "id": 1,
+    "title": "Trip to Nandi Hills",
+    "description": "Visited Nandi Hills and Skandhagiri Hills",
+    "Date": "2024-04-16",
+    "Location": "Chikkabellapur",
+    "user_id": 1
+  }
+```
 
 </Section>
 
@@ -349,32 +369,30 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlb
   - **Body**
     ```
     
-[
-  {
-    "id": 2,
-    "title": "Hiking adventure",
-    "description": "Explored the mountains and enjoyed the scenic views",
-    "Date": "2024-04-20",
-    "Location": "Switzerland",
-    "user_id": 2
-  },
-  {
-    "id": 4,
-    "title": "City tour",
-    "description": "Visited historical landmarks and tried local cuisine",
-    "Date": "2024-04-22",
-    "Location": "Rome, Italy",
-    "user_id": 2
-  }
-]
+    [
+      {
+        "id": 2,
+        "title": "Hiking adventure",
+        "description": "Explored the mountains and enjoyed the scenic views",
+        "Date": "2024-04-20",
+        "Location": "Switzerland",
+        "user_id": 2
+      },
+      {
+        "id": 4,
+        "title": "City tour",
+        "description": "Visited historical landmarks and tried local cuisine",
+        "Date": "2024-04-22",
+        "Location": "Rome, Italy",
+        "user_id": 2
+      }
+    ]
     ```
 
 </Section>
 
-'
-'
-'
-'
+
+
 
 
 
