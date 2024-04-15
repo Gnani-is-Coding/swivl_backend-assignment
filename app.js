@@ -29,6 +29,8 @@ const initializeDbandServer = async () => {
 
 initializeDbandServer()
 
+
+//Middleware function
 const authenticateJwtToken = (request,response, next) => {
     let jwtToken
     const authorizationHeaders = request.headers["authorization"]
@@ -54,14 +56,14 @@ const authenticateJwtToken = (request,response, next) => {
 
 }
 
+
 app.get("/", async(req,res) => {
     console.log("Hello World")
     res.send("Hello, from Gnani")
 })
 
-
 // Get all USERS API
-app.get("/users", authenticateJwtToken, async (request,response) => {
+app.get("/users",async (request,response) => {
     const query = `SELECT * FROM user;`
     const result = await db.all(query)
     console.log("get users",result)
@@ -121,7 +123,7 @@ app.post("/login", async (request,response) => {
 })
 
 //Get all Diaries in DB API
-app.get("/diaries", authenticateJwtToken, async (request, response) => {
+app.get("/diaries",async (request, response) => {
     const getDiariesQuery = `SELECT * FROM Diary;`
     const dbResponse = await db.all(getDiariesQuery)
 
